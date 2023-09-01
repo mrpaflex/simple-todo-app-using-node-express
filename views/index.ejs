@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>todos app</title>
+</head>
+<body>
+    <h1>things to do today</h1>
+    <form action="thingstodo" method="POST">
+
+        <input type="text" name="todos" placeholder="what to do" required><br /><br>
+        <label for="setTime">Set Time</label>
+        <input type="time" name="setTime" ><br /><br >
+        <!-- <textarea name="todos" id="dothis" cols="45" rows="10" placeholder="put what to do here today" required></textarea> -->
+        <button type="submit">Submit</button>
+
+        <h2>Left to do: <%= left %></h2>
+    </form>
+
+    <ul class="todoItems">
+        <%for(let i = 0; i< items.length; i++ ){%>
+            <li class="item">
+                <% if(items[i].completed === true){%>
+                    <span id="completed"><%= items[i].todoss %></span>
+                <% }else{%>
+                    <span><%=items[i].todoss %></span>
+                    <span><%= items[i].date %></span>
+                <%} %>
+                
+            </li>
+        <%}
+         %>
+    </ul>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

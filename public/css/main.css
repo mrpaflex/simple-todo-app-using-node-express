@@ -1,0 +1,10 @@
+#dothis{
+    resize: none;
+}
+ul{
+    flex: auto;
+}
+#completed{
+    color: red;
+    text-decoration-line: line-through;
+}
