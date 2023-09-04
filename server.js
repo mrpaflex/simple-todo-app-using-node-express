@@ -18,7 +18,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: true,
 }))
 
 app.use(express.json())
@@ -58,9 +58,9 @@ app.post('/thingstodo', (req, res)=>{
     })
 })
 
-app.put('/done', (request, response)=>{
+app.put('/completed_item_link', async (request, response)=>{
     db.collection('todocollection').updateOne({
-        todoss: request.body.jscompleteItem,
+        todoss: request.body.jscompleteItem_body,
         //date: request.body.jscompletedate
     }, {
         $set:{
@@ -72,15 +72,15 @@ app.put('/done', (request, response)=>{
     })
     .then(data=>{
         console.log(`item marked completed`)
-        response.json(`item completed`);
+        response.json();
     })
     .catch(error=>console.error(error))
 })
 
 
-app.put('/redo_me', (request, response)=>{
+app.put('/uncomplete_Item', (request, response)=>{
     db.collection('todocollection').updateOne({
-        todoss: request.body.redome,
+        todoss: request.body.uncomplete_item_body,
         //date: request.body.redodate
     }, {
         $set:{
@@ -92,7 +92,7 @@ app.put('/redo_me', (request, response)=>{
     })
     .then(data=>{
         console.log(`item unmarked`)
-        response.json('um')
+        response.json()
     })
         .catch(error=>console.error(error))
 })
@@ -100,3 +100,6 @@ app.put('/redo_me', (request, response)=>{
 app.listen(port, ()=>{
     console.log(`i am running on port ${port} please come inside`)
 })
+
+
+{/* <span><%= items[i].date %></span> */}

@@ -22,12 +22,11 @@
 
     <ul class="todoItems">
         <%for(let i = 0; i< items.length; i++ ){%>
-            <li class="item">
-                <% if(items[i].completed === true){%>
+            <li>
+                <% if(items[i].completed == true){%>
                     <span id="completed"><%= items[i].todoss %></span>
                 <% }else{%>
-                    <span><%=items[i].todoss %></span>
-                    <span><%= items[i].date %></span>
+                    <span id="undone"><%=items[i].todoss %></span>
                 <%} %>
                 
             </li>

@@ -1,51 +1,27 @@
-const redoItem = document.querySelectorAll('.item span');
+const completed_Item = document.querySelectorAll('#completed')
 
-const completedItem = document.querySelectorAll('.item span#completed')
+const uncomplete_Item = document.querySelectorAll('#undone');
 
-Array.from(completedItem).forEach((Element)=>{
-    Element.addEventListener('click', markmecomplete)
+Array.from(completed_Item).forEach((Element)=>{
+    Element.addEventListener('click', mark_Item_complete_fnc)
 })
 
-Array.from(redoItem).forEach((Element)=>{
-    Element.addEventListener('click', redotask)
+Array.from(uncomplete_Item).forEach((Element)=>{
+    Element.addEventListener('click', uncomplete_item_fnc)
 
 })
 
-async function redotask(){
-const getredotex = this.parentNode.childNodes[1].innerText;
-//const getredate = this.parentNode.childNodes[3].innerText;
+async function mark_Item_complete_fnc(){
+    const get_completedItem_text = this.parentNode.childNodes[1].innerText
+   //const completed_date = this.parentNode.childNodes[3].innerText
 
     try{
-        const holdfetct = await fetch('redo_me', {
-            method: 'put',
-            Headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({
-                'redome': getredotex,
-               // 'redodate': getredate
-            })
-        })
-
-        const data = await holdfetct.json()
-        location.reload()
-    }catch(error){
-        console.log(error)
-    }
-}
-
-
-
-
-async function markmecomplete(){
-    const completedItem = this.parentNode.childNodes[1].innerText;
-   // const completedate = this.parentNode.childNodes[3].innerText;
-
-    try{
-        const response = await fetch('done', {
+        const response = await fetch('completed_item_link', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                'jscompleteItem': completedItem,
-                //'jscompletedate': completedate
+                'jscompleteItem_body': get_completedItem_text,
+                //'jscompletedate': completed_date
             })
         })
         const data = await response.json()
@@ -55,3 +31,24 @@ async function markmecomplete(){
         console.log(error)
     }
 }
+
+async function uncomplete_item_fnc(){
+    const get_uncomplete_text = this.parentNode.childNodes[1].innerText
+    //const getredate = this.parentNode.childNodes[3].innerText
+    
+        try{
+            const store_uncomplete_item_fnc = await fetch('uncomplete_Item', {
+                method: 'put',
+                Headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                    'uncomplete_item_body': get_uncomplete_text,
+                    //'redodate': getredate
+                })
+            })
+    
+            const data = await store_uncomplete_item_fnc.json()
+            location.reload()
+        }catch(error){
+            console.log(error)
+        }
+    }
