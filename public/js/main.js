@@ -1,15 +1,17 @@
-const completed_Item = document.querySelectorAll('#completed')
+const completed_Item = document.querySelectorAll('span');
+const uncomplete_Item = document.querySelectorAll('#completed');
 
-const uncomplete_Item = document.querySelectorAll('#undone');
 
 Array.from(completed_Item).forEach((Element)=>{
     Element.addEventListener('click', mark_Item_complete_fnc)
-})
+});
+
+
 
 Array.from(uncomplete_Item).forEach((Element)=>{
     Element.addEventListener('click', uncomplete_item_fnc)
 
-})
+});
 
 async function mark_Item_complete_fnc(){
     const get_completedItem_text = this.parentNode.childNodes[1].innerText
@@ -24,9 +26,11 @@ async function mark_Item_complete_fnc(){
                 //'jscompletedate': completed_date
             })
         })
-        const data = await response.json()
-        console.log(data)
-        location.reload()
+        const data = await response.json(
+            location.reload()
+        )
+        //console.log(data)
+        
     }catch(error){
         console.log(error)
     }
@@ -37,17 +41,18 @@ async function uncomplete_item_fnc(){
     //const getredate = this.parentNode.childNodes[3].innerText
     
         try{
-            const store_uncomplete_item_fnc = await fetch('uncomplete_Item', {
+            const response = await fetch('uncomplete_itemlink', {
                 method: 'put',
-                Headers: {'Content-type': 'application/json'},
+                headers: {'Content-type': 'application/json'},
                 body: JSON.stringify({
                     'uncomplete_item_body': get_uncomplete_text,
                     //'redodate': getredate
                 })
             })
-    
-            const data = await store_uncomplete_item_fnc.json()
-            location.reload()
+            const data = await response.json(
+                location.reload()
+            )
+            
         }catch(error){
             console.log(error)
         }

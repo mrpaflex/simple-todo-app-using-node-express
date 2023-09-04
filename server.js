@@ -59,7 +59,7 @@ app.post('/thingstodo', (req, res)=>{
 })
 
 app.put('/completed_item_link', async (request, response)=>{
-    db.collection('todocollection').updateOne({
+   await db.collection('todocollection').updateOne({
         todoss: request.body.jscompleteItem_body,
         //date: request.body.jscompletedate
     }, {
@@ -71,15 +71,15 @@ app.put('/completed_item_link', async (request, response)=>{
         upsert: false
     })
     .then(data=>{
-        console.log(`item marked completed`)
+        console.log(`item marked completed`);
         response.json();
     })
     .catch(error=>console.error(error))
-})
+});
 
 
-app.put('/uncomplete_Item', (request, response)=>{
-    db.collection('todocollection').updateOne({
+app.put('/uncomplete_itemlink', async (request, response)=>{
+    await db.collection('todocollection').updateOne({
         todoss: request.body.uncomplete_item_body,
         //date: request.body.redodate
     }, {
@@ -87,12 +87,12 @@ app.put('/uncomplete_Item', (request, response)=>{
             completed: false
         }
     }, {
-        sort: {_id: 1},
+        sort: {_id: -1},
         upsert: false
     })
     .then(data=>{
         console.log(`item unmarked`)
-        response.json()
+        response.json();
     })
         .catch(error=>console.error(error))
 })
