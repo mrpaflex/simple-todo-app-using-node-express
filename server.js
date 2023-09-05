@@ -71,8 +71,8 @@ app.put('/completed_item_link', async (request, response)=>{
         upsert: false
     })
     .then(data=>{
-        console.log(`item marked completed`);
-        response.json();
+       // console.log(`item marked completed`);
+        response.json('marked completed')
     })
     .catch(error=>console.error(error))
 });
@@ -91,8 +91,8 @@ app.put('/uncomplete_itemlink', async (request, response)=>{
         upsert: false
     })
     .then(data=>{
-        console.log(`item unmarked`)
-        response.json();
+        //console.log(`item unmarked`)
+        response.json('mark uncompleted')//note you have to pass in the string inside to enable it reload automatically
     })
         .catch(error=>console.error(error))
 })
