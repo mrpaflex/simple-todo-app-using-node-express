@@ -1,7 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
-const port = 2019;
+
 require('dotenv').config()
 
 const MongoClient = require("mongodb").MongoClient;
@@ -53,7 +53,6 @@ app.post('/thingstodo', (req, res)=>{
         date: req.body.setTime
     })
     .then(data =>{
-        console.log('data added succesfully')
         res.redirect('/');
     })
 })
@@ -97,8 +96,8 @@ app.put('/uncomplete_itemlink', async (request, response)=>{
         .catch(error=>console.error(error))
 })
 
-app.listen(port, ()=>{
-    console.log(`i am running on port ${port} please come inside`)
+app.listen(process.env.PORT, ()=>{
+    console.log(`i am running on port ${process.env.PORT} please come inside`)
 })
 
 
